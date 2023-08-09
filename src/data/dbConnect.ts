@@ -7,4 +7,4 @@ if(process.env.ACCESS_DB){
   mongoose.connect(process.env.ACCESS_DB);
 }
 
-export let connectionDB = mongoose.connection;
+export const connectionDB = mongoose.connection;
