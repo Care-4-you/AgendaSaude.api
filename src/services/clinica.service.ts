@@ -23,4 +23,8 @@ export const ClinicaService = {
   update: async (id, clinicaData) => {
     return await Clinicas.findByIdAndUpdate(id, clinicaData);
   },
+
+  delete: async (id) => {
+    return await Clinicas.findByIdAndDelete(id);
+  },
 };

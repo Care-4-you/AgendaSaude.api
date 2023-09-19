@@ -7,5 +7,6 @@ router.post("/clinicas", ClinicaController.post);
 router.get("/clinicas", ClinicaController.get);
 router.get("/clinicas/:id", ClinicaController.getById);
 router.put("/clinicas/:id", ClinicaController.put);
+router.delete("/clinicas/:id", ClinicaController.delete);
 
 export default router;

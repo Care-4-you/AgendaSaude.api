@@ -56,4 +56,14 @@ export const ClinicaController = {
       res.status(500).json({ error: "Erro ao atualizar a clínica" });
     }
   },
+  delete: async (req, res) => {
+    try {
+      if (ClinicaService.getById(req.params.id) != null)
+        res.status(200).json(ClinicaService.delete(req.params.id));
+      else 
+        res.status(404).json({ error: "Clínica não encontrada" });
+    } catch (error) {
+      res.status(500).json({ error: "Erro ao atualizar a clínica" });
+    }
+  },
 };
