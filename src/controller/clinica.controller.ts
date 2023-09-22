@@ -23,10 +23,13 @@ export const ClinicaController = {
     }
   },
 
+  // GET /api/clinicas (tanto com e sem query)
   get: async (req, res) => {
     try {
-      const clinicas = await ClinicaService.getAll();
-      res.status(200).json(clinicas);
+      if(Object.keys(req.query).length === 0)
+        res.status(200).json(await ClinicaService.getAll());
+      else
+        res.status(200).json(await ClinicaService.getByQueryParams(req.query));
     } catch (error) {
       res.status(500).json({ error: "Erro interno ao listar as clínicas!" });
     }
