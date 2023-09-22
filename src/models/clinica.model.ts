@@ -57,6 +57,7 @@ const clinicasSchema = new mongoose.Schema({
       required: true,
     },
   },
+  especialidades: [String]
 });
 
 // Usando ES6 para o lint não brigar
