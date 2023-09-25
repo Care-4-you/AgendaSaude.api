@@ -1,9 +1,12 @@
-import * as express  from "express";
-import * as cors from "cors";
+import cors from "cors";
+import express, { Application } from "express";
+import clinicaRouter from "./routes/clinica.routes";
 
-export const app: express.Express = express();
+const app: Application = express();
 
 app.use(express.json());
 app.use(cors());
 
+app.use("/api", clinicaRouter);
 
+export default app;
