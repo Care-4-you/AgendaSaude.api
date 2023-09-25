@@ -1,21 +1,8 @@
 import { ClinicaService } from "../services/clinica.service";
 
-async function valid(req, res) {
-  const validationJson = await ClinicaService.validator(req.body);
-  if (validationJson != undefined) {
-    res.status(400).json({
-      error: "o Json enviado é invalido!",
-      detail: validationJson.errors,
-    });
-    return true;
-  }
-}
-
 export const ClinicaController = {
   post: async (req, res) => {
     try {
-      if (await valid(req, res)) return;
-
       const novaClinica = await ClinicaService.create(req.body);
       res.status(201).json(novaClinica);
     } catch (error) {
@@ -32,7 +19,7 @@ export const ClinicaController = {
         const result = await ClinicaService.getByQueryParams(req.query);
         if(result == null)
           res.status(400).json({error: "Consulta não permitida!"});
-      else
+        else
           res.status(200).json(result);
       }
     } catch (error) {
@@ -41,21 +28,19 @@ export const ClinicaController = {
   },
 
   getById: async (req, res) => {
-    try {
+    try {      
       const clinica = await ClinicaService.getById(req.params.id);
       if (!clinica)
         res.status(404).json({ error: "Clínica não encontrada" });
       else 
         res.status(200).json(clinica);
     } catch (error) {
-      res.status(500).json({ error: "Erro interno ao obter detalhes da clínica!" });
+      res.status(500).json({ error: "Erro interno ao obter detalhes da clínica!", a: error });
     }
   },
 
   put: async (req, res) => {
     try {
-      if (await valid(req, res)) return;
-
       if (ClinicaService.getById(req.params.id) != null)
         res.status(200).json(await ClinicaService.update(req.params.id, req.body));
       else 
