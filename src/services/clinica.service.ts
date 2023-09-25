@@ -40,6 +40,8 @@ export const ClinicaService = {
           .map((especialidade)=> new RegExp(especialidade, "i"))
       };
 
+
+    if(Object.keys(query).length == 0) return null;
     return await Clinicas.find(query);
   },
 };

@@ -28,8 +28,13 @@ export const ClinicaController = {
     try {
       if(Object.keys(req.query).length === 0)
         res.status(200).json(await ClinicaService.getAll());
+      else{
+        const result = await ClinicaService.getByQueryParams(req.query);
+        if(result == null)
+          res.status(400).json({error: "Consulta não permitida!"});
       else
-        res.status(200).json(await ClinicaService.getByQueryParams(req.query));
+          res.status(200).json(result);
+      }
     } catch (error) {
       res.status(500).json({ error: "Erro interno ao listar as clínicas!" });
     }
